@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tokens semânticos — os componentes usam as classes utilitárias abaixo,
+       nunca hex solto. Para reestilizar o site inteiro, mexa aqui e no
+       tailwind.config.js. */
+    --color-primary: #14110f; /* ações principais */
+    --color-accent: #cfa97b; /* detalhe/champanhe */
+    --color-foreground: #14110f;
+    --color-background: #f8f4ee;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo — e a faixa do modelo, cuja altura real é
+       publicada em `--bar-h` — ao pular para as âncoras */
+    scroll-padding-top: calc(6rem + var(--bar-h, 0px));
+  }
+
+  body {
+    @apply bg-marfim-100 font-sans text-noite-800 antialiased;
+  }
+
+  ::selection {
+    background: rgba(207, 169, 123, 0.35);
+    color: #14110f;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Foco sobre fundo escuro precisa de anel claro para manter 3:1 */
+  .on-dark :focus-visible {
+    outline-color: #e2c9a7;
+  }
+
+  /* Números tabulares: preços, durações, telefone e notas não "dançam" */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Scroll reveal (IntersectionObserver, sem bibliotecas) --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Acessibilidade: sem movimento quando o sistema pede para reduzir. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-kenburns {
+      animation: none !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Ritmo vertical único para todas as seções */
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  /* `whitespace-nowrap`: com caixa alta e espaçamento de letras, rótulos como
+     "Traçar rota" quebravam no meio dentro de colunas estreitas. */
+  .btn {
+    @apply inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 whitespace-nowrap
+           rounded-full px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.14em]
+           transition-all duration-200 focus:outline-none disabled:cursor-not-allowed
+           disabled:opacity-50;
+  }
+
+  /* CTA principal — grafite sobre marfim: 15,8:1 */
+  .btn-primary {
+    @apply btn bg-noite-900 text-marfim-50 shadow-soft hover:-translate-y-0.5 hover:bg-noite-700
+           active:translate-y-0 disabled:translate-y-0;
+  }
+
+  /* Ação secundária sobre fundo claro */
+  .btn-outline {
+    @apply btn border border-noite-900/25 bg-transparent text-noite-800 hover:-translate-y-0.5
+           hover:border-noite-900/60 hover:bg-noite-900/[0.04] active:translate-y-0;
+  }
+
+  /* Ação secundária sobre foto/fundo escuro */
+  .btn-onDark {
+    @apply btn border border-marfim-50/30 bg-white/10 text-marfim-50 backdrop-blur-sm
+           hover:-translate-y-0.5 hover:border-marfim-50/70 hover:bg-white/20 active:translate-y-0;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest2
+           text-champanhe-700 sm:text-xs;
+  }
+
+  .eyebrow-onDark {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest2
+           text-champanhe-300 sm:text-xs;
+  }
+
+  .h2 {
+    @apply font-display text-[2.1rem] font-medium leading-[1.12] tracking-tight text-noite-900
+           sm:text-4xl lg:text-[2.9rem];
+  }
+
+  .h2-onDark {
+    @apply font-display text-[2.1rem] font-medium leading-[1.12] tracking-tight text-marfim-50
+           sm:text-4xl lg:text-[2.9rem];
+  }
+
+  .lead {
+    @apply text-base leading-relaxed text-noite-500 sm:text-lg;
+  }
+
+  .card {
+    @apply rounded-lg border border-marfim-300 bg-marfim-50 shadow-soft;
+  }
+
+  /* Filete champanhe usado como separador editorial */
+  .rule {
+    @apply block h-px w-16 bg-champanhe-400;
+  }
+}

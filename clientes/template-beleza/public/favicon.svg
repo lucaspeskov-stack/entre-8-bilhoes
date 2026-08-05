@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Monograma do salão">
+  <rect width="64" height="64" rx="10" fill="#14110F" />
+  <g fill="none" stroke="#CFA97B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 12c6 6 9 11 9 16a9 9 0 0 1-18 0c0-5 3-10 9-16Z" />
+    <path d="M32 37v15" />
+    <path d="M25 52h14" />
+  </g>
+</svg>

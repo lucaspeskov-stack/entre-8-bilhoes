@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#14110F" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO — troque pelos dados do seu salão -->
+    <title>Nome do Seu Salão | Cabelo, Estética e Beleza</title>
+    <meta
+      name="description"
+      content="Salão de beleza com atendimento com hora marcada: corte, coloração, mechas, tratamentos, manicure, sobrancelha e maquiagem. Agende pelo WhatsApp."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.seudominio.com.br/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Nome do Seu Salão | Cabelo, Estética e Beleza" />
+    <meta
+      property="og:description"
+      content="Atendimento com hora marcada, profissionais especializados e produtos de alta performance."
+    />
+    <meta property="og:image" content="/hero-salao.jpg" />
+
+    <!-- Fontes: preconnect + display=swap evitam texto invisível (FOIT) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- A imagem do hero é o LCP: pré-carregada na variante correta por largura -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-salao.webp"
+      imagesrcset="/hero-salao-1100.webp 1100w, /hero-salao.webp 1717w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
