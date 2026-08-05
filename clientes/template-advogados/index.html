@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101215" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO — troque pelos dados do seu escritório -->
+    <title>Nome do Seu Escritório | Advocacia e Consultoria Jurídica</title>
+    <meta
+      name="description"
+      content="Escritório de advocacia com atendimento direto com o advogado. Direito civil, trabalhista, de família, empresarial, previdenciário e criminal. Agende sua consulta."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.seudominio.com.br/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Nome do Seu Escritório | Advocacia e Consultoria Jurídica" />
+    <meta
+      property="og:description"
+      content="Atendimento direto com o advogado, do primeiro contato ao fim do processo."
+    />
+    <meta property="og:image" content="/hero-escritorio.jpg" />
+
+    <!-- Fontes: preconnect + display=swap evitam texto invisível (FOIT) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- A imagem do hero é o LCP: pré-carregada na variante correta por largura -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-escritorio.webp"
+      imagesrcset="/hero-escritorio-1100.webp 1100w, /hero-escritorio.webp 1717w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tokens semânticos — os componentes usam as classes utilitárias abaixo,
+       nunca hex solto. Para reestilizar o site inteiro, mexa aqui e no
+       tailwind.config.js. */
+    --color-primary: #1f4373; /* ações principais */
+    --color-accent: #c9a961; /* detalhe/latão */
+    --color-foreground: #101215;
+    --color-background: #f4f1ea;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo — e a faixa do modelo, cuja altura real é
+       publicada em `--bar-h` — ao pular para as âncoras */
+    scroll-padding-top: calc(6rem + var(--bar-h, 0px));
+  }
+
+  body {
+    @apply bg-bone-100 font-sans text-ink-800 antialiased;
+  }
+
+  ::selection {
+    background: rgba(31, 67, 115, 0.16);
+    color: #101215;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Foco sobre fundo escuro precisa de anel claro para manter 3:1 */
+  .on-dark :focus-visible {
+    outline-color: #e3cb98;
+  }
+
+  /* Números tabulares: telefones, notas, prazos e estatísticas não "dançam" */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Scroll reveal (IntersectionObserver, sem bibliotecas) --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Acessibilidade: sem movimento quando o sistema pede para reduzir. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-kenburns {
+      animation: none !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Ritmo vertical único para todas as seções */
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-sm px-6
+           py-3 text-sm font-bold tracking-wide transition-all duration-200 focus:outline-none
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* CTA principal — marinho sobre branco: 9,1:1 */
+  .btn-primary {
+    @apply btn bg-marinho-500 text-white shadow-soft hover:-translate-y-0.5 hover:bg-marinho-600
+           active:translate-y-0 disabled:translate-y-0;
+  }
+
+  /* Ação secundária sobre fundo claro */
+  .btn-outline {
+    @apply btn border border-ink-900/25 bg-transparent text-ink-800 hover:-translate-y-0.5
+           hover:border-ink-900/60 hover:bg-ink-900/[0.04] active:translate-y-0;
+  }
+
+  /* Ação secundária sobre foto/fundo escuro */
+  .btn-onDark {
+    @apply btn border border-bone-50/30 bg-white/10 text-bone-50 backdrop-blur-sm
+           hover:-translate-y-0.5 hover:border-bone-50/70 hover:bg-white/20 active:translate-y-0;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest2
+           text-gold-700 sm:text-xs;
+  }
+
+  .eyebrow-onDark {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest2
+           text-gold-300 sm:text-xs;
+  }
+
+  .h2 {
+    @apply font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-900
+           sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .h2-onDark {
+    @apply font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-bone-50
+           sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .lead {
+    @apply text-base leading-relaxed text-ink-500 sm:text-lg;
+  }
+
+  .card {
+    @apply rounded-sm border border-bone-300 bg-bone-50 shadow-soft;
+  }
+
+  /* Filete de latão usado como separador editorial */
+  .rule {
+    @apply block h-px w-16 bg-gold-400;
+  }
+
+  /* Marca de campo editável do template (texto que o advogado deve trocar) */
+  .slot {
+    @apply rounded-[2px] bg-gold-400/[0.18] px-1 decoration-gold-500/50 decoration-dotted
+           underline-offset-4;
+  }
+  .slot-onDark {
+    @apply rounded-[2px] bg-gold-300/[0.14] px-1 text-gold-200;
+  }
+}
