@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #0e0f11;
+    --color-accent: #c0272d;
+    --color-brass: #c8a356;
+    --color-bg: #f3efe8;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* compensa o header fixo ao usar âncoras */
+  }
+
+  body {
+    @apply bg-bone-100 text-ink-800 font-sans antialiased;
+  }
+
+  ::selection {
+    background: rgba(192, 39, 45, 0.16);
+    color: #0e0f11;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Números tabulares em dados (avaliações, telefone, horários) */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Scroll reveal (IntersectionObserver, sem libs) --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-kenburns {
+      animation: none !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-sm px-6 py-3
+           text-sm font-bold tracking-wide transition-all duration-200 focus:outline-none;
+  }
+
+  /* CTA principal — vermelho da marca, contraste 5.9:1 com branco */
+  .btn-primary {
+    @apply btn bg-vinho-500 text-white shadow-soft hover:-translate-y-0.5 hover:bg-vinho-600
+           active:translate-y-0;
+  }
+
+  /* Ação secundária sobre fundo claro */
+  .btn-outline {
+    @apply btn border border-ink-900/25 bg-transparent text-ink-800 hover:-translate-y-0.5
+           hover:border-ink-900/60 hover:bg-ink-900/[0.04] active:translate-y-0;
+  }
+
+  /* Ação secundária sobre fundo escuro / foto */
+  .btn-onDark {
+    @apply btn border border-bone-50/30 bg-white/10 text-bone-50 backdrop-blur-sm
+           hover:-translate-y-0.5 hover:border-bone-50/60 hover:bg-white/20 active:translate-y-0;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest2
+           text-vinho-700 sm:text-xs;
+  }
+
+  .eyebrow-onDark {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest2
+           text-brass-300 sm:text-xs;
+  }
+
+  .h2 {
+    @apply font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-900
+           sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .lead {
+    @apply text-base leading-relaxed text-ink-500 sm:text-lg;
+  }
+
+  .card {
+    @apply rounded-sm border border-bone-300 bg-bone-50 shadow-soft;
+  }
+
+  /* Filete de latão usado como separador editorial */
+  .rule {
+    @apply h-px w-16 bg-brass-400;
+  }
+}
