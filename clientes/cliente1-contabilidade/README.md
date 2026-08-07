@@ -172,6 +172,32 @@ divergente é penalizado.
 
 ## Deploy
 
+Endereço de produção: **`https://stephanie-contabilidade.vercel.app`**
+
+O Vercel deriva o subdomínio do **nome do projeto**, não do nome da pasta — por
+isso a pasta continua `cliente1-contabilidade` e o projeto se chama
+`stephanie-contabilidade`. O script da raiz do repositório aceita esse nome
+como segundo argumento:
+
+```bash
+VERCEL_TOKEN=seu_token node deploy-to-vercel.js cliente1-contabilidade stephanie-contabilidade
+```
+
+Sem o segundo argumento o script mantém o padrão antigo (`forja-<slug>`), então
+os outros sites não mudam.
+
+Se preferir a interface: em **Settings → General → Project Name**, renomear o
+projeto troca o `.vercel.app` na hora — funciona inclusive para um site já
+publicado.
+
+> `stephanie-contabilidade.vercel.app` não respondia na verificação, ou seja,
+> o nome está livre. Mas o subdomínio é global no `vercel.app`: se outra conta
+> tiver tomado o nome nesse meio-tempo, o Vercel acrescenta um sufixo ao
+> endereço. Confira a URL que o deploy imprime na última linha.
+
 `vercel.json` já vem configurado (framework Vite + cache imutável de um ano
 para vídeo, imagens e fontes). Na Vercel, aponte o *Root Directory* para
 `clientes/cliente1-contabilidade`.
+
+**Ao migrar para domínio próprio**, troque as quatro URLs do `index.html`
+(`canonical`, `og:url`, `og:image` e as duas do bloco JSON-LD).

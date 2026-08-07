@@ -5,13 +5,20 @@
  * deploy-to-vercel.js
  *
  * Faz o deploy de um site da pasta clientes/<slug> no Vercel, criando/vinculando
- * um projeto chamado "forja-<slug>" (framework Vite) e publicando em produção.
+ * um projeto (framework Vite) e publicando em produção.
+ *
+ * O endereço final é https://<nome-do-projeto>.vercel.app — o Vercel deriva o
+ * subdomínio do nome do projeto. Por padrão o nome é "forja-<slug>", mas pode
+ * ser informado explicitamente quando o endereço precisa ser diferente do nome
+ * da pasta (ex.: pasta "cliente1-contabilidade" publicando em
+ * "stephanie-contabilidade.vercel.app").
  *
  * Uso:
- *   VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js <slug>
+ *   VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js <slug> [nome-do-projeto]
  *   ex: VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js i-am-salon-spa
+ *   ex: VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js cliente1-contabilidade stephanie-contabilidade
  *
- * Saída (última linha do stdout): https://forja-<slug>.vercel.app
+ * Saída (última linha do stdout): https://<nome-do-projeto>.vercel.app
  *
  * SEGURANÇA: o token NUNCA é gravado neste arquivo. Ele é lido de
  * process.env.VERCEL_TOKEN para não vazar no histórico do git. Exporte o token
@@ -32,12 +39,27 @@ const slug = (process.argv[2] || '').trim();
 if (!slug) {
   fail(
     'Informe o slug do cliente.\n' +
-    '   Uso: VERCEL_TOKEN=xxxx node deploy-to-vercel.js <slug>\n' +
+    '   Uso: VERCEL_TOKEN=xxxx node deploy-to-vercel.js <slug> [nome-do-projeto]\n' +
     '   ex:  VERCEL_TOKEN=xxxx node deploy-to-vercel.js i-am-salon-spa'
   );
 }
 if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
   fail(`Slug inválido: "${slug}". Use apenas minúsculas, números e hífens.`);
+}
+
+/**
+ * Nome do projeto no Vercel — é ele que define o endereço
+ * https://<nome>.vercel.app. Omitido, mantém o padrão histórico "forja-<slug>".
+ *
+ * O limite de 100 caracteres e o conjunto de caracteres são os do próprio
+ * Vercel: melhor falhar aqui, com mensagem clara, do que na API.
+ */
+const nomeInformado = (process.argv[3] || '').trim();
+if (nomeInformado && !/^[a-z0-9][a-z0-9-]{0,98}[a-z0-9]$/.test(nomeInformado)) {
+  fail(
+    `Nome de projeto inválido: "${nomeInformado}".\n` +
+    '   Use minúsculas, números e hífens; comece e termine com letra ou número (máx. 100).'
+  );
 }
 
 const token = process.env.VERCEL_TOKEN;
@@ -49,7 +71,7 @@ if (!token) {
   );
 }
 
-const projectName = `forja-${slug}`;
+const projectName = nomeInformado || `forja-${slug}`;
 const projectDir = path.resolve(__dirname, 'clientes', slug);
 
 if (!fs.existsSync(projectDir) || !fs.statSync(projectDir).isDirectory()) {

@@ -6,14 +6,16 @@
     <meta name="theme-color" content="#0A0908" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- SEO — trocar a URL canônica pelo domínio real antes de publicar -->
+    <!-- SEO — a URL canônica aponta para o endereço de produção. Ao migrar
+         para um domínio próprio, troque as quatro ocorrências abaixo
+         (canonical, og:url, og:image e o bloco JSON-LD). -->
     <title>Stephanie Viana | Contadora — Contabilidade sem burocracia</title>
     <meta
       name="description"
       content="Contabilidade para pessoas físicas, MEIs e pequenas empresas: abertura e regularização de empresas, contabilidade mensal e apoio consultivo. Atendimento 100% online pelo WhatsApp."
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.seudominio.com.br/" />
+    <link rel="canonical" href="https://stephanie-contabilidade.vercel.app/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -23,7 +25,8 @@
       property="og:description"
       content="Atendimento personalizado, com orientação clara e soluções para manter suas obrigações em dia."
     />
-    <meta property="og:image" content="/hero-poster.jpg" />
+    <meta property="og:url" content="https://stephanie-contabilidade.vercel.app/" />
+    <meta property="og:image" content="https://stephanie-contabilidade.vercel.app/hero-poster.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Fontes auto-hospedadas (ver src/fonts.css): sem requisição a terceiro no
@@ -44,8 +47,8 @@
         "@type": "Accountant",
         "name": "Stephanie Viana | Contabilidade",
         "description": "Contabilidade para pessoas físicas, MEIs e pequenas empresas, com atendimento próximo e 100% online.",
-        "url": "https://www.seudominio.com.br/",
-        "image": "https://www.seudominio.com.br/hero-poster.jpg",
+        "url": "https://stephanie-contabilidade.vercel.app/",
+        "image": "https://stephanie-contabilidade.vercel.app/hero-poster.jpg",
         "telephone": "+5521933004084",
         "areaServed": "BR",
         "availableLanguage": "pt-BR",
