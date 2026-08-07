@@ -1,0 +1,163 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tokens semânticos — os componentes usam as classes utilitárias abaixo,
+       nunca hex solto. Para reestilizar o site inteiro, mexa aqui e no
+       tailwind.config.js. */
+    --color-primary: #121110; /* ações principais */
+    --color-accent: #c2a578; /* detalhe/bronze */
+    --color-foreground: #121110;
+    --color-background: #f7f3ec;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo ao pular para as âncoras */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-areia-100 font-sans text-grafite-800 antialiased;
+  }
+
+  ::selection {
+    background: rgba(194, 165, 120, 0.35);
+    color: #121110;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Foco sobre fundo escuro precisa de anel claro para manter 3:1 */
+  .on-dark :focus-visible {
+    outline-color: #d9c39c;
+  }
+
+  /* Números tabulares: CRC, telefone e notas não "dançam" */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Scroll reveal (IntersectionObserver, sem bibliotecas) --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Acessibilidade: sem movimento quando o sistema pede para reduzir.
+     O vídeo do hero nem chega a ser montado — ver `usePrefersReducedMotion`. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-kenburns {
+      animation: none !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Ritmo vertical único para todas as seções */
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  /* `whitespace-nowrap`: com caixa alta e tracking largo, rótulos como
+     "Agende uma conversa" quebravam no meio dentro de colunas estreitas. */
+  .btn {
+    @apply inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 whitespace-nowrap
+           rounded-full px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.14em]
+           transition-all duration-200 focus:outline-none disabled:cursor-not-allowed
+           disabled:opacity-50;
+  }
+
+  /* CTA principal — grafite sobre areia: 19,1:1 */
+  .btn-primary {
+    @apply btn bg-grafite-900 text-areia-50 shadow-soft hover:-translate-y-0.5 hover:bg-grafite-700
+           active:translate-y-0 disabled:translate-y-0;
+  }
+
+  /* CTA principal sobre fundo escuro — areia sobre grafite, mesma relação invertida */
+  .btn-light {
+    @apply btn bg-areia-50 text-grafite-900 shadow-soft-lg hover:-translate-y-0.5 hover:bg-white
+           active:translate-y-0;
+  }
+
+  /* Ação secundária sobre fundo claro */
+  .btn-outline {
+    @apply btn border border-grafite-900/25 bg-transparent text-grafite-800 hover:-translate-y-0.5
+           hover:border-grafite-900/60 hover:bg-grafite-900/[0.04] active:translate-y-0;
+  }
+
+  /* Ação secundária sobre vídeo/fundo escuro */
+  .btn-onDark {
+    @apply btn border border-areia-50/35 bg-white/5 text-areia-50 backdrop-blur-sm
+           hover:-translate-y-0.5 hover:border-areia-50/80 hover:bg-white/15 active:translate-y-0;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest2
+           text-bronze-700 sm:text-xs;
+  }
+
+  .eyebrow-onDark {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest2
+           text-bronze-300 sm:text-xs;
+  }
+
+  .h2 {
+    @apply font-display text-[2.1rem] font-medium leading-[1.12] tracking-tight text-grafite-900
+           sm:text-4xl lg:text-[2.9rem];
+  }
+
+  .h2-onDark {
+    @apply font-display text-[2.1rem] font-medium leading-[1.12] tracking-tight text-areia-50
+           sm:text-4xl lg:text-[2.9rem];
+  }
+
+  .lead {
+    @apply text-base leading-relaxed text-grafite-500 sm:text-lg;
+  }
+
+  .card {
+    @apply rounded-lg border border-areia-300 bg-areia-50 shadow-soft;
+  }
+
+  /* Filete bronze usado como separador editorial */
+  .rule {
+    @apply block h-px w-16 bg-bronze-400;
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0A0908" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO — trocar a URL canônica pelo domínio real antes de publicar -->
+    <title>Stephanie Viana | Contadora — Contabilidade sem burocracia</title>
+    <meta
+      name="description"
+      content="Contabilidade para pessoas físicas, MEIs e pequenas empresas: abertura e regularização de empresas, contabilidade mensal e apoio consultivo. Atendimento 100% online pelo WhatsApp."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.seudominio.com.br/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Stephanie Viana | Contadora" />
+    <meta property="og:title" content="Stephanie Viana | Contadora — Contabilidade sem burocracia" />
+    <meta
+      property="og:description"
+      content="Atendimento personalizado, com orientação clara e soluções para manter suas obrigações em dia."
+    />
+    <meta property="og:image" content="/hero-poster.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fontes auto-hospedadas (ver src/fonts.css): sem requisição a terceiro no
+         caminho crítico. Só o subset `latin` é pré-carregado — é o que o
+         português usa; `latin-ext` fica sob demanda pelo unicode-range. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-display-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />
+
+    <!-- O pôster do hero é o LCP: é ele que aparece antes do primeiro frame do
+         vídeo, e é a imagem servida a quem pede menos movimento -->
+    <link rel="preload" as="image" href="/hero-poster.jpg" fetchpriority="high" />
+
+    <!-- Dados estruturados. Endereço e CNPJ ficam de fora enquanto forem
+         placeholder: o Google penaliza dado institucional divergente. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Accountant",
+        "name": "Stephanie Viana | Contabilidade",
+        "description": "Contabilidade para pessoas físicas, MEIs e pequenas empresas, com atendimento próximo e 100% online.",
+        "url": "https://www.seudominio.com.br/",
+        "image": "https://www.seudominio.com.br/hero-poster.jpg",
+        "telephone": "+5521933004084",
+        "areaServed": "BR",
+        "availableLanguage": "pt-BR",
+        "sameAs": ["https://www.instagram.com/stecontabilidade/"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
