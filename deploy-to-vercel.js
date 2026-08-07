@@ -10,13 +10,13 @@
  * O endereço final é https://<nome-do-projeto>.vercel.app — o Vercel deriva o
  * subdomínio do nome do projeto. Por padrão o nome é "forja-<slug>", mas pode
  * ser informado explicitamente quando o endereço precisa ser diferente do nome
- * da pasta (ex.: pasta "cliente1-contabilidade" publicando em
+ * da pasta (ex.: pasta "viana-contabilidade" publicando em
  * "stephanie-contabilidade.vercel.app").
  *
  * Uso:
  *   VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js <slug> [nome-do-projeto]
  *   ex: VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js i-am-salon-spa
- *   ex: VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js cliente1-contabilidade stephanie-contabilidade
+ *   ex: VERCEL_TOKEN=xxxxxxxx node deploy-to-vercel.js viana-contabilidade stephanie-contabilidade
  *
  * Saída (última linha do stdout): https://<nome-do-projeto>.vercel.app
  *
@@ -97,7 +97,7 @@ console.log(`\n🚀 Deploy "${slug}" → projeto Vercel "${projectName}"`);
 console.log(`   Pasta:     clientes/${slug}`);
 console.log(`   Framework: vite (definido em clientes/${slug}/vercel.json)\n`);
 
-// 3a) cria/vincula o projeto com o nome forja-<slug>
+// 3a) cria/vincula o projeto com o nome resolvido acima
 console.log('🔗 Vinculando/criando projeto no Vercel...');
 try {
   vercel(['link', '--project', projectName]);
